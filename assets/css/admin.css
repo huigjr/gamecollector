@@ -1,0 +1,270 @@
+/******************************/
+/*        GENERAL CSS         */
+/******************************/
+
+*{
+    margin:0;
+    padding:0;
+    border:0;
+    box-sizing:border-box;
+}
+
+html{
+    font-family:Tahoma,Arial,sans-serif;
+}
+
+a{
+    text-decoration:none;
+}
+
+p{
+    color:#666;
+}
+
+p{
+    line-height:26px;
+    font-size:17px;
+}
+
+header{
+    width:100%;
+    background:#4287f5;
+    display:flex;
+    justify-content:space-between;
+    font-weight:bold;
+}
+
+header #logo{
+    font-size:20px;
+    padding:12px;
+    color:#fff;
+}
+
+header #loginbutton{
+    font-size:13px;
+    color:#fff;
+    border:2px solid #fff;
+    padding:4px 12px;
+    margin:10px;
+    transition:all 200ms ease-in-out;
+}
+
+header #loginbutton:hover{
+    color:#4287f5;
+    background:#fff;
+}
+
+main{
+    min-height:82vh;
+    width:98%;
+    max-width:800px;
+    margin:10px auto;
+}
+
+footer{
+    font-size:11px;
+    text-align:center;
+}
+
+figcaption{
+    text-align:center;
+    color:#000;
+    font-size:12px;
+}
+
+.sectionheader{
+    width:100%;
+    border-bottom:1px solid #4287f5;
+    color:#4287f5;
+    line-height:36px;
+    display:flex;
+    justify-content:space-between;
+}
+
+.sectionheader a{
+    color:#fff;
+    background:#ffc400;
+    padding:0 12px;
+    font-size:18px;
+    font-weight:bold;
+    transition:all 200ms ease-in-out;
+}
+
+.sectionheader a:hover{
+    background:#d9a700;
+}
+
+/******************************/
+/*         TABLE CSS          */
+/******************************/
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+tr:nth-child(odd){
+    background:#edfaf0;
+}
+
+tr:hover, tr:nth-child(odd):hover{
+    background:#ddd;
+}
+
+td:last-child{
+    text-align:right;
+    width:100px;
+}
+
+td{
+    padding:12px;
+}
+
+td a{
+    color:#000;
+    font-size:20px;
+    margin:0 6px;
+}
+
+/******************************/
+/*         POPUP CSS          */
+/******************************/
+
+.popup{
+    width:100%;
+    max-width:800px;
+    height:80px;
+    position:absolute;
+    top:-90px;
+    left:0;
+    right:0;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    text-align:center;
+    font-weight:bold;
+    border:2px solid #333;
+    animation:fadeinout 4s 1;
+}
+
+.error{
+    background:#fc8189;
+}
+
+.message{
+    background:#91f298;
+}
+
+@keyframes fadeinout{
+  from {top:-90px;}
+  10%  {top:0}
+  90%  {top:0}
+  to   {top:-90px;}
+}
+
+/*******************************/
+/*          LOGIN CSS          */
+/*******************************/
+
+.login{
+    width:96%;
+    max-width:400px;
+    height:220px;
+    background:#4287f5;
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    margin:auto;
+    padding:20px;
+    color:#fff;
+}
+
+.login input, .login button{
+    width:100%;
+    margin:10px 0;
+}
+
+/********************************/
+/*        NAVIGATION CSS        */
+/********************************/
+
+nav{
+    display:flex;
+    justify-content:center;
+    border-bottom:1px solid #4287f5;
+}
+
+nav a{
+    color:#4287f5;
+    padding:12px 20px;
+    font-weight:bold;
+    transition:all 200ms ease-in-out;
+}
+
+nav a:hover{
+    color:#fff;
+    background:#4287f5;
+}
+
+/********************************/
+/*           FORM CSS           */
+/********************************/
+
+input, textarea, select{
+    border:1px solid #333;
+    padding:8px;
+}
+
+button, .button{
+    border:1px solid #333;
+    padding:8px;
+    background:#f39c12;
+    color:#000;
+    cursor:pointer;
+    transition:all 200ms ease-in-out;
+}
+
+button:hover,.button:hover{
+    background:#f1c40f;
+}
+
+#filter{
+    width:100%;
+    margin:6px 0;
+}
+
+.editform{
+    width:100%;
+    max-width:500px;
+    margin:0 auto;
+}
+
+.editform input[type=text], .editform button{
+    width:100%;
+}
+
+.editform label{
+    color:#4287f5;
+    font-size:13px;
+    line-height:22px;
+}
+
+.checkboxrows{
+    display:inline-block;
+    width:32%;
+}
+
+/********************************/
+/*        Responsive CSS        */
+/********************************/
+
+@media all and (max-width: 1100px){}
+
+@media all and (max-width: 560px){
+    .checkboxrows{
+        width:49%;
+    }
+}

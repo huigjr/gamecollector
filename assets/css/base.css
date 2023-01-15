@@ -1,0 +1,46 @@
+/******************************/
+/*        GENERAL CSS         */
+/******************************/
+
+*{
+    margin:0;
+    padding:0;
+    border:0;
+    box-sizing:border-box;
+}
+
+html{
+    font-family: Arial, sans-serif;
+}
+
+a{
+    text-decoration:none;
+}
+
+/********************************/
+/*           FORM CSS           */
+/********************************/
+
+input, textarea, select{
+    border:1px solid #555;
+    padding:6px;
+}
+
+button, .button{
+    border:1px solid #555;
+    padding:6px;
+    background:#aaa;
+    color:#000;
+    cursor:pointer;
+    transition:all 200ms ease-in-out;
+}
+
+button:hover,.button:hover{
+    background:#777;
+}
+
+/********************************/
+/*        Responsive CSS        */
+/********************************/
+
+@media all and (max-width: 700px){}

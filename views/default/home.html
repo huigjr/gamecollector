@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="NL">
+<head>
+	<title>Gamecollector.nl</title>
+    <meta charset="UTF-8">
+	<base href="/" target="_self">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="assets/css/style.css" type="text/css">
+</head>
+<body>
+
+<header>
+    <a id="logo" href="/">Gamecollector.nl</a>
+    <a id="loginbutton" href="/admin">login</a>
+</header>
+
+<main>
+    <section class="gameslist">
+<?php foreach($games() as $game):?>
+        <a href="games/<?=$game['url']?>"><figure>
+<?php if($game['image']):?>
+            <img src="assets/images/raw/<?=$game['console']?>/<?=$game['image']?>" alt="<?=$game['title']?>">
+<?php else:?>
+            <img src="assets/images/noimage.jpg" alt="<?=$game['title']?>">
+<?php endif;?>
+            <figcaption><?=$game['title']?></figcaption>
+        </figure></a>
+<?php endforeach;?>
+    </section>
+</main>
+
+<footer>&copy; 2023 | Gamecollector.nl | <?=$debug?></footer>
+
+</body>
+</html>
