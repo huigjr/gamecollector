@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="EN">
+<head>
+	<title><?=$title?> | Gamecollector.nl</title>
+    <meta charset="UTF-8">
+	<base href="/" target="_self">
+	<meta name="description" content="">
+    <meta name="robots" content="noindex,nofollow">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="assets/css/admin.css" type="text/css">
+</head>
+<body>
+
+<?=$notification?>
+
+<header>
+    <a id="logo" href="/admin">Gamecollector.nl</a>
+    <a id="loginbutton" href="/logout">logout</a>
+</header>
+
+<nav>
+<?=$navigation?>
+</nav>
+
+<main>
+    <section class="adminsection">
+        <div class="sectionheader">
+            <h3><?=$title?></h3>
+        </div>
+        <div class="consolenav">
+<?php foreach($consoles() as $c):?>
+            <a href="/admin/games/console/<?=$c['console']?>"><?=$c['console']?></a>
+<?php endforeach;?>
+        </div>
+        <a class="button" href="/admin/<?=$entity?>/new">new game</a><br><br>
+        <input id="filter" type="text" placeholder="Filter">
+        <table id="table">
+<?php foreach($list() as $item):?>
+            <tr>
+                <td><?=$item['title']?></td>
+                <td><?=$item['releases']?></td>
+                <td>
+                    <a title="Edit" href="/admin/<?=$entity?>/edit/<?=$item['url']?>">✎</a>
+                    <a title="Delete" 
+                       href="/admin/<?=$entity?>/delete/<?=$item['url']?>" 
+                       onclick="return confirm('Are you sure you want to delete <?=$item['title']?>?')"
+                    >🗑</a>
+                </td>
+            </tr>
+<?php endforeach;?>
+        </table>
+    </section>
+</main>
+
+<footer>&copy; 2023 | Gamecollector.nl | <?=$debug?></footer>
+
+<script>
+let filter = document.getElementById("filter");
+let rows = document.getElementById("table").getElementsByTagName("tr");
+filter.addEventListener("input", function(){
+    for(i=0;i<rows.length;i++){
+        content = rows[i].getElementsByTagName("td")[0].textContent.toLowerCase();
+        if(content.includes(filter.value.toLowerCase())){
+            rows[i].style.display = "";
+        } else {
+            rows[i].style.display = "none";
+        }
+    }
+});
+</script>
+
+</body>
+</html>

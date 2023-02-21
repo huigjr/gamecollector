@@ -6,7 +6,7 @@ class HomeController extends BaseController
 
     public function init()
     {
-        $this->di->PageModel->read(1);
         $this->di->GameModel->getHome();
+        $this->di->PageModel->read(1);
     }
 }

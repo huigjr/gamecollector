@@ -10,106 +10,54 @@
 }
 
 html{
-    font-family:Tahoma,Arial,sans-serif;
+    font-family: Arial, sans-serif;
 }
 
 a{
     text-decoration:none;
 }
 
-h2, p{
-    color:#666;
-}
-
-p{
-    line-height:26px;
-    font-size:17px;
-}
-
 header{
-    width:100%;
-    background:#4287f5;
     display:flex;
     justify-content:space-between;
-    font-weight:bold;
+    background:#54a0ff;
 }
 
-header #logo{
-    font-size:20px;
-    padding:12px;
+header a{
     color:#fff;
-}
-
-header #loginbutton{
-    font-size:13px;
-    color:#fff;
-    border:2px solid #fff;
-    padding:4px 12px;
-    margin:10px;
-    transition:all 200ms ease-in-out;
-}
-
-header #loginbutton:hover{
-    color:#4287f5;
-    background:#fff;
+    padding:8px 16px;
 }
 
 main{
-    min-height:86vh;
-    width:100%;
-    max-width:1440px;
-    margin:10px auto;
+    min-height:90vh;
 }
 
 footer{
+    text-align:center;
     font-size:11px;
-    text-align:center;
+    color:#aaa;
 }
 
-figcaption{
-    text-align:center;
-    color:#000;
-    font-size:12px;
-}
+/********************************/
+/*         GAMELIST CSS         */
+/********************************/
 
-.sectionheader{
-    width:100%;
-    border-bottom:1px solid #4287f5;
-    color:#4287f5;
-    line-height:36px;
-}
-
-/*******************************/
-/*          GAMES CSS          */
-/*******************************/
-
-.gameslist{
+.gamelist{
     display:flex;
     flex-wrap:wrap;
-    justify-content:start;
+    justify-content:space-evenly;
 }
 
-.gameslist a{
-    margin:10px;
-}
-
-.gameslist figure{
-    width:340px;
-    height:370px;
-    border:1px solid #fff;
-    transition:all 300ms ease-in-out;
-}
-
-.gameslist figure:hover{
-    border:1px solid #ddd;
-    border-radius:12px;
-}
-
-.gameslist img{
-    width:340px;
-    height:340px;
+.gamelist img{
+    width:300px;
+    height:400px;
     object-fit:contain;
-    padding-top:10px;
+}
+
+.gamelist a{
+    color:#000;
+    text-align:center;
+    margin:10px;
 }
 
 /********************************/
@@ -117,52 +65,41 @@ figcaption{
 /********************************/
 
 .gamedetail{
-    display:flex;
     width:100%;
-    max-width:800px;
-    margin:0 auto;
+    max-width:1240px;
+    margin:20px auto;
+    display:flex;
+    align-items:center;
 }
 
 .gamedetail div{
     width:50%;
-    padding:20px;
+    padding:10px;
 }
 
-.gamedetail img{
-    width:100%;
+.gamedetail p,.gamedetail h3{
+    line-height:28px;
 }
 
-.releases{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:space-evenly;
+/*********************************/
+/*           LOGIN CSS           */
+/*********************************/
+
+.spacer{
+    height:30vh;
+}
+
+.login{
+    background:#54a0ff;
     width:96%;
-    max-width:900px;
-    margin:10px auto;
+    max-width:350px;
+    margin:0 auto;
+    padding:12px;
 }
 
-.releases img{
-    width:280px;
-    height:280px;
-    object-fit:contain;
-    padding-top:10px;
-}
-
-.tag{
-    color:#fff;
-    background:#4287f5;
-    padding:8px 16px;
-    margin:2px;
-    border-radius:16px;
-}
-
-/********************************/
-/*        NAVIGATION CSS        */
-/********************************/
-
-nav{
-    display:flex;
-    justify-content:space-evenly;
+.login input, .login button{
+    width:100%;
+    margin:4px 0;
 }
 
 /********************************/
@@ -170,61 +107,25 @@ nav{
 /********************************/
 
 input, textarea, select{
-    border:1px solid #555;
+    border:1px solid #333;
     padding:6px;
 }
 
 button, .button{
-    border:1px solid #555;
+    border:1px solid #333;
     padding:6px;
-    background:#aaa;
-    color:#000;
+    background:#d63031;
+    color:#fff;
     cursor:pointer;
     transition:all 200ms ease-in-out;
 }
 
 button:hover,.button:hover{
-    background:#777;
+    background:#ff7675;
 }
 
 /********************************/
 /*        Responsive CSS        */
 /********************************/
 
-@media all and (max-width: 1100px){
-    .gameslist figure{
-        width:240px;
-        height:270px;
-    }
-    
-    .gameslist img{
-        width:240px;
-        height:240px;
-    }
-    
-    .releases img{
-        width:180px;
-        height:180px;
-    }
-}
-
-@media all and (max-width: 560px){
-    .gameslist figure{
-        width:180px;
-        height:210px;
-    }
-    
-    .gameslist img{
-        width:180px;
-        height:180px;
-    }
-    
-    .gamedetail{
-        flex-direction:column;
-    }
-    
-    .gamedetail div{
-        width:100%;
-        padding:20px;
-    }
-}
+@media all and (max-width: 700px){}

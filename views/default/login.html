@@ -1,36 +1,31 @@
 <!DOCTYPE html>
-<html lang="NL">
+<html lang="EN">
 <head>
 	<title>Login | Gamecollector.nl</title>
     <meta charset="UTF-8">
 	<base href="/" target="_self">
 	<meta name="description" content="">
-    <meta name="robots" content="noindex,nofollow">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="assets/css/admin.css" type="text/css">
+	<link rel="stylesheet" href="assets/css/style.css" type="text/css">
 </head>
 <body>
 
-<?=$notification?>
-
 <header>
-    <a id="logo" href="/">Gamecollector.nl</a>
+    <a href="/">Gamecollector.nl</a>
 </header>
 
 <main>
+    <div class="spacer"></div>
     <section class="login">
-        <h2>Login</h2>
         <form method="POST">
-            <input type="text" name="username" placeholder="Username" autofocus>
-            <input type="password" name="password" placeholder="Password">
-            <button type="submit">Login</button>
+            <label>Username<input type="text" name="username"></label>
+            <label>Password<input type="password" name="password"></label>
+            <button type="submit">login</button>
         </form>
     </section>
 </main>
 
-<footer>
-    &copy; 2023 | Gamecollector.nl | <?=$debug?>
-</footer>
+<footer>&copy; 2023 | <?=$_SERVER['HTTP_HOST']?> | <?=$debug?></footer>
 
 </body>
 </html>

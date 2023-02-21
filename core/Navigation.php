@@ -21,11 +21,11 @@ class Navigation
     {
         $output = '<a href="/admin">Home</a>'.PHP_EOL;
         foreach(AdminController::MODELS as $key => $value){
-            $output .= '<a href="/admin/'.$key.'">'.ucfirst($key).'</a>'.PHP_EOL;
+            if($value['nav']) $output .= '<a href="/admin/'.$key.'">'.ucfirst($key).'</a>'.PHP_EOL;
         }
-        return $output;
+        return $output.'<a href="/logout">Logout</a>'.PHP_EOL;
     }
-    
+
     private function getFrontMenu()
     {
         return null;

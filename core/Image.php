@@ -49,7 +49,9 @@ class Image
     {
         $extension = pathinfo($path, PATHINFO_EXTENSION);
         if($extension === 'webp') return imagewebp($this->image, $path, $quality);
-        elseif($extension === 'jpg') return imagewebp($this->image, $path, $quality);
+        elseif($extension === 'jpg') return imagejpeg($this->image, $path, $quality);
+        elseif($extension === 'png') return imagepng($this->image, $path, $quality);
+        elseif($extension === 'gif') return imagegif($this->image, $path, $quality);
         else return false;
     }
     

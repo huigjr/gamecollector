@@ -3,11 +3,13 @@
 class AdminController extends BaseController
 {
     protected $template = 'admin';
-    protected $accesslevel = 1;
+    protected $accesslevel = 2;
     
     const MODELS = [
-        'pages' => ['model' => 'PageModel', 'accesslevel' => 1],
-        'games' => ['model' => 'GameModel', 'accesslevel' => 1],
+        'pages'    => ['model' => 'PageModel',    'accesslevel' => 2, 'nav' => true],
+        'games'    => ['model' => 'GameModel',    'accesslevel' => 2, 'nav' => true],
+        'releases' => ['model' => 'ReleaseModel', 'accesslevel' => 2, 'nav' => false],
+        'covers'   => ['model' => 'CoverModel',   'accesslevel' => 2, 'nav' => false],
     ];
 
     public function init()
@@ -16,8 +18,11 @@ class AdminController extends BaseController
         if($i === 0) $this->home();
         elseif($i === 1) $this->list($this->slug[0]);
         elseif($i === 2 && $this->slug[1] === 'new') $this->new($this->slug[0]);
+        elseif($i === 3 && $this->slug[1] === 'new') $this->new($this->slug[0], $this->slug[2]);
         elseif($i === 3 && $this->slug[1] === 'edit') $this->update($this->slug[0], $this->slug[2]);
         elseif($i === 3 && $this->slug[1] === 'delete') $this->delete($this->slug[0], $this->slug[2]);
+        elseif($i === 4 && $this->slug[1] === 'edit') $this->update($this->slug[0], $this->slug[3], $this->slug[2]);
+        elseif($i === 3 && $this->slug[1] === 'console') $this->consolelist($this->slug[2]);
         else RedirectHelper::pageNotFound();
     }
 
@@ -28,50 +33,45 @@ class AdminController extends BaseController
     
     private function list($entity)
     {
-        $this->view = 'list.html';
+        $this->view = "list$entity.html";
         $this->di->Page->title = ucfirst($entity);
         $this->di->Page->entity = $entity;
         $model = $this->getModel($entity);
         $model->list();
     }
     
-    private function new($entity)
+    private function consolelist($console)
     {
-        $model = $this->getModel($entity);
-        if(!empty($_POST)){
-            $model->create($_POST);
-            $this->session->message = 'Created successfully!';
-            RedirectHelper::redirect("/admin/$entity");
-        } else $model->new();
-        $this->view = "edit$entity.html";
+        $this->view = "listgames.html";
+        $this->di->Page->title = 'Games | '.ucfirst($console);
+        $this->di->Page->entity = 'games';
+        $model = $this->getModel('games');
+        $model->list($console);
+    }
+    
+    private function new($entity, $parentid = null)
+    {
+        if($parentid) $this->di->Page->parentid = $parentid;
+        $model = $this->post($entity, 'create', $parentid);
+        $model->new();
     }
 
-    private function update($entity, $url)
+    private function update($entity, $url, $parentid = null)
     {
-        $model = $this->getModel($entity);
-        if(!empty($_POST)){
-            $model->update($_POST);
-            $this->session->message = 'Saved successfully!';
-            RedirectHelper::redirect("/admin/$entity");
-        }
-        $this->view = "edit$entity.html";
+        $model = $this->post($entity, 'update', $parentid);
         $model->read($url, 'url');
     }
 
     private function delete($entity, $url)
     {
-        if($entity === 'pages'){
-            if($url === 'home'){
-                $this->session->error = "The home page can't be deleted";
-            } else {
-                $model = $this->getModel($entity);
-                $model->delete($url, 'url');
-                $this->session->message = 'Deleted successfully!';
-            }
+        if($entity === 'pages' && $url === 'home'){
+            $this->session->error = "The home page can't be deleted";
         } else {
-            $this->session->error = 'Delete function not yet implemented for Games';
+            $model = $this->getModel($entity);
+            $model->delete($url, 'url');
+            $this->session->message = 'Deleted successfully!';
         }
-        RedirectHelper::redirect("/admin/$entity");
+        RedirectHelper::redirect($model->return ?? "/admin/$entity");
     }
 
     private function getModel($slug)
@@ -82,5 +82,17 @@ class AdminController extends BaseController
         }
         if($class && class_exists($class)) return $this->di->$class;
         else RedirectHelper::pageNotFound();
+    }
+    
+    private function post($entity, $method, $parentid = null)
+    {
+        $this->view = "edit$entity.html";
+        $model = $this->getModel($entity);
+        if(!empty($_POST)){
+            if($parentid) $model->parentid = $parentid;
+            if($model->$method($_POST)) $this->session->message = 'Saved successfully';
+            else $this->session->error = 'Failed to save';
+            RedirectHelper::redirect($model->return ?? "/admin/$entity");
+        } else return $model;
     }
 }

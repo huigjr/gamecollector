@@ -10,88 +10,142 @@
 }
 
 html{
-    font-family:Tahoma,Arial,sans-serif;
+    font-family: Arial, sans-serif;
 }
 
 a{
     text-decoration:none;
 }
 
-p{
-    color:#666;
-}
-
-p{
-    line-height:26px;
-    font-size:17px;
-}
-
 header{
-    width:100%;
-    background:#4287f5;
     display:flex;
     justify-content:space-between;
+    background:#54a0ff;
+}
+
+header a{
+    color:#fff;
+    padding:8px 16px;
+}
+
+nav{
+    display:flex;
+    justify-content:center;
+    border-bottom:1px solid #54a0ff;
+}
+
+nav a{
+    color:#54a0ff;
+    text-transform:uppercase;
+    padding:10px 20px;
+    font-size:14px;
     font-weight:bold;
-}
-
-header #logo{
-    font-size:20px;
-    padding:12px;
-    color:#fff;
-}
-
-header #loginbutton{
-    font-size:13px;
-    color:#fff;
-    border:2px solid #fff;
-    padding:4px 12px;
-    margin:10px;
     transition:all 200ms ease-in-out;
 }
 
-header #loginbutton:hover{
-    color:#4287f5;
-    background:#fff;
+nav a:hover{
+    color:#fff;
+    background:#54a0ff;
 }
 
 main{
-    min-height:82vh;
-    width:98%;
+    min-height:86vh;
+}
+
+footer{
+    text-align:center;
+    font-size:11px;
+    color:#aaa;
+}
+
+.adminsection{
+    width:100%;
     max-width:800px;
     margin:10px auto;
 }
 
-footer{
-    font-size:11px;
-    text-align:center;
-}
-
-figcaption{
-    text-align:center;
-    color:#000;
-    font-size:12px;
-}
-
-.sectionheader{
+.adminsection input[type=text], .adminsection textarea{
     width:100%;
-    border-bottom:1px solid #4287f5;
-    color:#4287f5;
-    line-height:36px;
-    display:flex;
-    justify-content:space-between;
 }
 
-.sectionheader a{
+.adminsection textarea{
+    height:120px;
+    margin-bottom:10px;
+}
+
+.checkboxrows{
+    display:inline-block;
+    width:32.9%;
+}
+
+/********************************/
+/*         GAMELIST CSS         */
+/********************************/
+
+.gamelist{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-evenly;
+}
+
+.gamelist img{
+    width:300px;
+    height:400px;
+    object-fit:contain;
+}
+
+.gamelist a{
+    color:#000;
+    text-align:center;
+    margin:10px;
+}
+
+.consolenav{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    margin:20px 0;
+}
+
+.consolenav a{
     color:#fff;
-    background:#ffc400;
-    padding:0 12px;
-    font-size:18px;
+    background:#54a0ff;
+    text-transform:uppercase;
+    padding:10px 22px;
+    margin-bottom:12px;
+    margin-right:12px;
+    font-size:14px;
     font-weight:bold;
+    border:2px solid #54a0ff;
+    border-radius:16px;
     transition:all 200ms ease-in-out;
 }
 
-.sectionheader a:hover{
-    background:#d9a700;
+.consolenav a:hover{
+    color:#54a0ff;
+    background:#fff;
+}
+
+/********************************/
+/*           FORM CSS           */
+/********************************/
+
+input, textarea, select{
+    border:1px solid #333;
+    padding:6px;
+}
+
+button, .button{
+    border:1px solid #333;
+    padding:6px;
+    background:#d63031;
+    color:#fff;
+    cursor:pointer;
+    transition:all 200ms ease-in-out;
+}
+
+button:hover,.button:hover{
+    background:#ff7675;
 }
 
 /******************************/
@@ -103,21 +157,20 @@ table{
     border-collapse:collapse;
 }
 
-tr:nth-child(odd){
-    background:#edfaf0;
+tr:nth-child(odd){}
+tr:not(:last-child){}
+
+tr{
+    border-top:1px solid #ccc;
 }
 
-tr:hover, tr:nth-child(odd):hover{
-    background:#ddd;
+td{
+    padding:4px;
 }
 
 td:last-child{
     text-align:right;
     width:100px;
-}
-
-td{
-    padding:12px;
 }
 
 td a{
@@ -146,6 +199,7 @@ td a{
     font-weight:bold;
     border:2px solid #333;
     animation:fadeinout 4s 1;
+    z-index:10;
 }
 
 .error{
@@ -163,108 +217,18 @@ td a{
   to   {top:-90px;}
 }
 
-/*******************************/
-/*          LOGIN CSS          */
-/*******************************/
-
-.login{
-    width:96%;
-    max-width:400px;
-    height:220px;
-    background:#4287f5;
-    position:absolute;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
-    margin:auto;
-    padding:20px;
-    color:#fff;
-}
-
-.login input, .login button{
-    width:100%;
-    margin:10px 0;
-}
-
 /********************************/
-/*        NAVIGATION CSS        */
+/*           FONT CSS           */
 /********************************/
 
-nav{
-    display:flex;
-    justify-content:center;
-    border-bottom:1px solid #4287f5;
+@font-face {
+    font-family:Quicksand;
+    src:url("../fonts/Quicksand.woff2");
 }
 
-nav a{
-    color:#4287f5;
-    padding:12px 20px;
-    font-weight:bold;
-    transition:all 200ms ease-in-out;
-}
-
-nav a:hover{
-    color:#fff;
-    background:#4287f5;
-}
-
-/********************************/
-/*           FORM CSS           */
-/********************************/
-
-input, textarea, select{
-    border:1px solid #333;
-    padding:8px;
-}
-
-button, .button{
-    border:1px solid #333;
-    padding:8px;
-    background:#f39c12;
-    color:#000;
-    cursor:pointer;
-    transition:all 200ms ease-in-out;
-}
-
-button:hover,.button:hover{
-    background:#f1c40f;
-}
-
-#filter{
-    width:100%;
-    margin:6px 0;
-}
-
-.editform{
-    width:100%;
-    max-width:500px;
-    margin:0 auto;
-}
-
-.editform input[type=text], .editform button{
-    width:100%;
-}
-
-.editform label{
-    color:#4287f5;
-    font-size:13px;
-    line-height:22px;
-}
-
-.checkboxrows{
-    display:inline-block;
-    width:32%;
-}
 
 /********************************/
 /*        Responsive CSS        */
 /********************************/
 
-@media all and (max-width: 1100px){}
-
-@media all and (max-width: 560px){
-    .checkboxrows{
-        width:49%;
-    }
-}
+@media all and (max-width: 700px){}

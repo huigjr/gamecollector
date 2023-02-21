@@ -3,6 +3,7 @@
 class Page
 {
 
+    public $heartbeat;
     public $navigation = '';
     public $notification = '';
     
@@ -14,6 +15,7 @@ class Page
     {
         $this->di = $di;
         $this->session = $di->Session;
+        $this->heartbeat = $this->session->heartbeat ?? false;
         $this->checkNotification();
         $this->navigation = $di->Navigation->get();
         $this->setTemplate('default', 'default.html');

@@ -6,7 +6,7 @@ class GamesController extends BaseController
 
     public function init()
     {
-        $game = new GameModel($this->di);
-        $game->getDetail($this->slug[0]);
+        if(count($this->slug) === 1)$this->di->GameModel->getDetail($this->slug[0]);
+        else RedirectHelper::pageNotFound();
     }
 }

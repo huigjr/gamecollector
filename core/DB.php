@@ -20,7 +20,8 @@ class DB
     public function insert($query, $params = null)
     {
         $this->execute($query, $params);
-        return $this->pdo->lastInsertId();
+        $id = $this->pdo->lastInsertId();
+        return $id ?: true;
     }
     
     public function getAll($query, $params = null)
