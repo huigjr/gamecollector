@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="EN">
 <head>
-	<title>Admin | Gamecollector.nl</title>
+	<title><?=empty($console) ? 'New release' : 'Edit release'?> | Gamecollector.nl</title>
     <meta charset="UTF-8">
 	<base href="/" target="_self">
     <meta name="robots" content="noindex,nofollow">
@@ -22,18 +22,22 @@
 
 <main>
     <section class="adminsection">
-        <div class="sectionheader"><h3><?=empty($title) ? 'New' : 'Edit: '.$title?></h3></div><br>
+        <div class="sectionheader"><h3><?=empty($console) ? 'New release' : 'Edit release'?></h3></div><br>
         <form method="POST">
             <input type="hidden" name="releaseid" value="<?=$releaseid ?? null?>">
+            <input type="hidden" name="gameid" value="<?=$gameid ?? $parentid ?? null?>">
             <label>Console<input type="text" name="console" placeholder="Console" value="<?=$console ?? null?>"></label><br><br>
             <label>Region<input type="text" name="region" placeholder="Region" value="<?=$region ?? null?>"></label><br><br>
+            <label>Releasedate<br><input type="date" name="releasedate" placeholder="Releasedate" value="<?=$releasedate ?? null?>"></label><br><br>
+            <label>Developer<input type="text" name="developer" placeholder="Developer" value="<?=$developer ?? null?>"></label><br><br>
+            <label>Publisher<input type="text" name="publisher" placeholder="Publisher" value="<?=$publisher ?? null?>"></label><br><br>
             <button type="submit">Save</button>
         </form>
     </section>
 </main>
 
 <footer>
-    &copy; 2023 | Gamecollector.nl | <?=$debug?>
+    &copy; 2023 | Gamecollector.nl | <?=$debug?> 
 </footer>
 
 </body>

@@ -25,8 +25,23 @@
         <div class="sectionheader"><h3>Covers</h3></div><br>
         <form method="POST" enctype="multipart/form-data">
             <input type="hidden" name="releaseid" value="<?=$parentid ?? null?>">
-            <label>Console<br><select name="console"><option value="ps5">PS5</option></select></label><br><br>
-            <label>Region<br><select name="region"><option value="eu">EU</option></select></label><br><br>
+            <label>Console<br>
+                <select name="console">
+                    <option value="ps5">PS5</option>
+                    <option value="ps4">PS4</option>
+                    <option value="smart">XB Smart Delivery</option>
+                    <option value="sxs">SeriesX/S</option>
+                    <option value="xbo">Xbox One</option>
+                    <option value="switch">Switch</option>
+                </select>
+            </label><br><br>
+            <label>Region<br>
+                <select name="region">
+                    <option value="eu">EU</option>
+                    <option value="na">NA</option>
+                    <option value="jp">JP</option>
+                </select>
+            </label><br><br>
             <label>File<br><input type="file" name="file"></label><br><br>
             <button type="submit">Save</button>
         </form>

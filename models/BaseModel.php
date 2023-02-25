@@ -26,6 +26,7 @@ abstract class BaseModel
 
     public function read($value, $column = null)
     {
+        if(is_string($value) && empty($column)) $column = 'url';
         $this->page->fill($this->db->read($this->table, ($column ?: $this->id), $value));
     }
 

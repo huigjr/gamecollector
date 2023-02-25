@@ -17,14 +17,16 @@
 
 <main>
     <section class="gamedetail">
-        <div>
-            <img src="assets/images/raw/<?=$console?>/<?=$image?>" alt="<?=$title?>">
+        <div id="detailimages">
+<?php foreach($covers() as $cover):?><?php extract($cover);?>
+            <img onclick="this.parentElement.prepend(this)" src="assets/images/large/<?=$console?>/<?=$image?>" alt="<?=$console?>-<?=$title?>">
+<?php endforeach;?>
         </div>
         <div>
             <h1><?=$title?></h1>
             <br>
             <h3>Omschrijving</h3>
-            <p><?=$description_nl?></p>
+            <p><?=nl2br($description_nl)?></p>
         </div>
     </section>
 </main>

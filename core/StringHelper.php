@@ -21,7 +21,7 @@ class StringHelper
         $string = str_replace('@', ' at ', $string);
         $string = str_replace('%', ' percent ', $string);
         $string = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', SELF::sanitizeURI($string)); // Try to transliterate utf-8 to ascii or dump characters
-        $string = str_replace("'", '', $string);
+        $string = str_replace(["'",'"'], '', $string);
         return str_replace(' ', '-', trim(preg_replace('!\s+!', ' ', strtolower($string)))); // Replace all spaces with single dash and lowercase
     }
     

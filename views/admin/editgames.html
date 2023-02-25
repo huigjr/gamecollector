@@ -48,17 +48,23 @@
             </tr>
 <?php endforeach;?>
         </table>
+        <br><a class="button" href="/admin/releases/new/<?=$gameid?>">add release</a><br><br>
     </section>
 
     <section class="adminsection">
         <div class="sectionheader"><h3>Covers</h3></div><br>
+        <div class="editcovers">
+<?php foreach($covers() as $cover):?>
+            <img src="assets/images/large/<?=$cover['console']?>/<?=$cover['image']?>" alt="<?=$title?>">
+<?php endforeach;?>
+        </div>
         <a class="button" href="/admin/covers/new/<?=$gameid?>">add cover</a><br><br>
     </section>
 <?php endif;?>
 </main>
 
 <footer>
-    &copy; 2023 | Gamecollector.nl | <?=$debug?>
+    &copy; 2023 | Gamecollector.nl | <?=$debug?> 
 </footer>
 
 </body>

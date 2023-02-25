@@ -40,11 +40,11 @@ class Page
         foreach($array as $key => $value) $this->$key = $value;
     }
     
-    public function partial($name, $query)
+    public function partial($name, $query, $params = null)
     {
         $db = $this->di->DB;
-        $this->$name = function() use ($db, $query){
-            foreach($db->generate($query) as $row) yield $row;
+        $this->$name = function() use ($db, $query, $params){
+            foreach($db->generate($query, $params) as $row) yield $row;
         };
     }
 

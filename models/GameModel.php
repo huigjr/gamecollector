@@ -9,26 +9,30 @@ class GameModel extends BaseModel
     public function getHome()
     {
         $this->page->partial('games', "
-            SELECT `title`,`url`,`console`,`image` FROM `games` INNER JOIN `releases` 
-            ON `games`.`gameid` = `releases`.`gameid` 
-            WHERE `releases`.`region` IN ('na','eu') 
+            SELECT `title`,`url`,`console`,`image` FROM `games` INNER JOIN `covers` 
+            ON `games`.`gameid` = `covers`.`gameid` 
+            WHERE `covers`.`region` IN ('na','eu') 
             AND `image` IS NOT NULL 
-            GROUP BY `releases`.`gameid` 
-            ORDER BY `releases`.`releasedate` DESC");
+            GROUP BY `covers`.`gameid` 
+            ORDER BY `games`.`title`");
+    }
+
+    public function getGamesByConsole($console)
+    {
+        $consoles = array_flip(ConsoleModel::CONSOLES);
+        if(in_array($console, array_flip(ConsoleModel::CONSOLES))){
+            $this->page->partial('games', "
+            SELECT * FROM `covers` INNER JOIN `games` ON `covers`.`gameid` = `games`.`gameid` 
+            WHERE `console` = '{$console}' OR `second` = '{$console}'");
+        } else RedirectHelper::pageNotFound();
     }
 
     public function getDetail($url)
     {
-        $this->page->fill($this->db->getRow("SELECT `games`.*, `image` FROM `games` INNER JOIN `releases` 
-                                             ON `games`.`gameid` = `releases`.`gameid` 
-                                             WHERE `url` = :url AND `image` IS NOT NULL 
-                                             GROUP BY `releases`.`gameid`", ['url' => $url]));
-        
-        //$this->page->tags = $this->di->GenreModel->getGenres($this->page->genres);
-        $this->page->releases = $releases = $this->db->getAll("
-            SELECT * FROM `releases` WHERE `gameid` = '".$this->page->gameid."'");
-        $this->page->image = $releases[0]['image'];
-        $this->page->console = $releases[0]['console'];
+        parent::read($url);
+        $query = "SELECT console,image FROM `covers` WHERE `gameid` = '{$this->page->gameid}'";
+        list($this->page->console, $this->page->image) = array_values($this->db->getRow($query));
+        $this->di->CoverModel->getAllGameCovers($this->page->gameid);
     }
 
     public function create($array)
@@ -42,6 +46,7 @@ class GameModel extends BaseModel
         parent::read($value, $column);
         $this->page->genres = $this->di->GenreModel->getCheckedGenres($this->page->genres);
         $this->page->partial('releases', "SELECT * FROM `releases` WHERE `gameid` = {$this->page->gameid}");
+        $this->page->partial('covers', "SELECT * FROM `covers` WHERE `gameid` = {$this->page->gameid}");
     }
 
     public function update($array)

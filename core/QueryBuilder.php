@@ -34,7 +34,12 @@ class QueryBuilder extends DB
     {
         return $this->insert("UPDATE {$this->safe($table)} SET {$this->safe($switch)} = 1 - {$this->safe($switch)} WHERE {$this->safe($column)} = :{$this->safe($key)}", [$key => $value]);
     }
-    
+
+    public function count($table, $column, $value)
+    {
+        return $this->getValue("SELECT COUNT(*) FROM {$this->safe($table)} WHERE {$this->safe($column)} = :{$this->safe($column)}", [$column => $value]);
+    }
+
     private function implode($glue, $array)
     {
         return implode($glue, $array);
@@ -44,7 +49,7 @@ class QueryBuilder extends DB
     {
         return preg_replace('/[^a-zA-Z0-9-_]/u','',trim($string));
     }
-    
+
     private function trim($array)
     {
         foreach($array as &$item) $item = trim($item) ?: null;

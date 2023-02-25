@@ -3,3 +3,5 @@ composer.lock
 /vendor/
 /#raw
 /scripts
+/assets/images/large
+/assets/images/raw
