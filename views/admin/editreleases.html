@@ -26,8 +26,21 @@
         <form method="POST">
             <input type="hidden" name="releaseid" value="<?=$releaseid ?? null?>">
             <input type="hidden" name="gameid" value="<?=$gameid ?? $parentid ?? null?>">
-            <label>Console<input type="text" name="console" placeholder="Console" value="<?=$console ?? null?>"></label><br><br>
-            <label>Region<input type="text" name="region" placeholder="Region" value="<?=$region ?? null?>"></label><br><br>
+            <input type="hidden" name="type" value="<?=$type ?? 1?>">
+            <label>Console<br>
+                <select name="consoleid">
+<?php foreach($consoles as $console):?>
+                    <option value="<?=$console['consoleid']?>" <?=($consoleid == $console['consoleid'] ? 'selected' : '')?>><?=$console['name']?></option>
+<?php endforeach;?>
+                </select>
+            </label><br><br>
+            <label>Regions<br>
+                <select name="regionid">
+<?php foreach($regions as $region):?>
+                    <option value="<?=$region['regionid']?>" <?=($regionid == $region['regionid'] ? 'selected' : '')?>><?=$region['name']?></option>
+<?php endforeach;?>
+                </select>
+            </label><br><br>
             <label>Releasedate<br><input type="date" name="releasedate" placeholder="Releasedate" value="<?=$releasedate ?? null?>"></label><br><br>
             <label>Developer<input type="text" name="developer" placeholder="Developer" value="<?=$developer ?? null?>"></label><br><br>
             <label>Publisher<input type="text" name="publisher" placeholder="Publisher" value="<?=$publisher ?? null?>"></label><br><br>

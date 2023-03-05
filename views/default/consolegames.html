@@ -15,6 +15,12 @@
     <a href="/admin">Login</a>
 </header>
 
+<nav>
+<?php foreach(ConsoleModel::CONSOLES as $url => $title):?>
+    <a href="/consoles/<?=$url?>"><?=$title?></a>
+<?php endforeach;?>
+</nav>
+
 <main>
     <section class="gamelist">
 <?php foreach($games() as $game):?>

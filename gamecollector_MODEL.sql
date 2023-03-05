@@ -99,6 +99,7 @@ CREATE TABLE IF NOT EXISTS `regions` (
   `parent` tinyint(3) DEFAULT NULL,
   `short` varchar(2) DEFAULT NULL,
   `name` varchar(16) DEFAULT NULL,
+  `flag` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`regionid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AUTO_INCREMENT=1;
 
@@ -111,6 +112,8 @@ CREATE TABLE IF NOT EXISTS `regions` (
 CREATE TABLE IF NOT EXISTS `releases` (
   `releaseid` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
   `gameid` smallint(5) UNSIGNED NOT NULL,
+  `consoleid` tinyint(3) UNSIGNED NOT NULL,
+  `regionid` tinyint(3) UNSIGNED NOT NULL,
   `console` varchar(16) DEFAULT NULL,
   `region` varchar(2) DEFAULT NULL,
   `type` tinyint(3) UNSIGNED NOT NULL,
@@ -119,6 +122,22 @@ CREATE TABLE IF NOT EXISTS `releases` (
   `publisher` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`releaseid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AUTO_INCREMENT=1;
+
+CREATE VIEW releaseview AS
+    SELECT `releases`.`releaseid`
+    , `releases`.`gameid`
+    , `games`.`title`
+    , `games`.`url`
+    , `games`.`genres`
+    , `releases`.`type`
+    , `releases`.`releasedate`
+    , `consoles`.`short` as console
+    , `regions`.`short` as region
+    , `regions`.`flag`
+    FROM `releases` 
+    LEFT JOIN `consoles` ON `releases`.`consoleid` = `consoles`.`consoleid`
+    LEFT JOIN `games` ON `releases`.`gameid` = `games`.`gameid` 
+    LEFT JOIN `regions` ON `releases`.`regionid` = `regions`.`regionid`;
 
 -- --------------------------------------------------------
 

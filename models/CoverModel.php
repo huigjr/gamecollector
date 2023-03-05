@@ -26,7 +26,7 @@ class CoverModel extends BaseModel
             $raw = ROOT."/assets/images/raw/{$console}/{$filename}.".$this->getExtention();
             if(move_uploaded_file($_FILES["file"]["tmp_name"], $raw)){
                 $image = new Image($raw);
-                $image->scaleToWidth(600);
+                $image->scaleToWidth(540);
                 $image->save(ROOT."/assets/images/large/{$console}/{$filename}.webp", 60);
                 parent::create([
                     'gameid' => $game['gameid'],

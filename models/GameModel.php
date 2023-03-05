@@ -33,19 +33,21 @@ class GameModel extends BaseModel
         $query = "SELECT console,image FROM `covers` WHERE `gameid` = '{$this->page->gameid}'";
         list($this->page->console, $this->page->image) = array_values($this->db->getRow($query));
         $this->di->CoverModel->getAllGameCovers($this->page->gameid);
+        $this->di->ReleaseModel->getAllGameReleases($this->page->gameid);
     }
 
     public function create($array)
     {
         $array['url'] = StringHelper::slugify($array['title']);
-        return parent::create($array);
+        $gameid = parent::create($array);
+        RedirectHelper::redirect("/admin/releases/new/$gameid");
     }
 
     public function read($value, $column = null)
     {
         parent::read($value, $column);
         $this->page->genres = $this->di->GenreModel->getCheckedGenres($this->page->genres);
-        $this->page->partial('releases', "SELECT * FROM `releases` WHERE `gameid` = {$this->page->gameid}");
+        $this->di->ReleaseModel->list(null, $this->page->gameid);
         $this->page->partial('covers', "SELECT * FROM `covers` WHERE `gameid` = {$this->page->gameid}");
     }
 
@@ -62,11 +64,12 @@ class GameModel extends BaseModel
     
     public function list($table = null, $id = null)
     {
-        $where = $table ? "HAVING `releases`.`console` = '$table'" : '';
-        $query = "SELECT `games`.`gameid`,`games`.`title`,`games`.`url`,`releases`.`console`, 
-                  COUNT(`games`.`gameid`) AS releases 
-                  FROM `releases` INNER JOIN `games` ON `releases`.`gameid` = `games`.`gameid`  
-                  GROUP BY `releases`.`gameid` $where ORDER BY `games`.`title`";
+        $where = $table ? "WHERE `consoles`.`short` = '$table'" : '';
+        $query = "SELECT `releases`.`gameid`,`games`.`title`,`games`.`url`,
+                  COUNT(`releases`.`gameid`) AS releases FROM `releases` 
+                  LEFT JOIN `consoles` ON `releases`.`consoleid` = `consoles`.`consoleid`
+                  LEFT JOIN `games` ON `releases`.`gameid` = `games`.`gameid` $where
+                  GROUP BY `releases`.`gameid` ORDER BY `games`.`url`";
         $this->page->partial('list', $query);
         $this->page->partial('consoles', "SELECT DISTINCT(`console`) as console FROM `releases` ORDER BY `console`");
     }

@@ -10,7 +10,8 @@
 }
 
 html{
-    font-family: Arial, sans-serif;
+    font-family:MavenPro,Arial,sans-serif;
+    background:#fafafa;
 }
 
 a{
@@ -26,6 +27,34 @@ header{
 header a{
     color:#fff;
     padding:8px 16px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+header a:last-child{
+    font-size:12px;
+    line-height:20px;
+    text-transform:uppercase;
+}
+
+nav{
+    display:flex;
+    justify-content:center;
+    border-bottom:1px solid #54a0ff;
+}
+
+nav a{
+    color:#54a0ff;
+    text-transform:uppercase;
+    padding:10px 20px;
+    font-size:14px;
+    font-weight:bold;
+    transition:all 200ms ease-in-out;
+}
+
+nav a:hover{
+    color:#fff;
+    background:#54a0ff;
 }
 
 main{
@@ -67,23 +96,35 @@ footer{
 
 .gamedetail{
     width:100%;
-    max-width:1240px;
+    max-width:1400px;
     margin:20px auto;
     display:flex;
-    align-items:center;
+    align-items:top;
 }
 
-.gamedetail div{
+.gamedetail > div{
     width:50%;
-    padding:10px;
+    margin:0 auto;
 }
 
-.gamedetail p,.gamedetail h3{
+.gamedetail p{
     line-height:28px;
+    font-size:18px;
+}
+
+#detailimages{
+    width:100%;
+    max-width:580px;
+    padding:10px;
+    background:#fff;
+    margin:0 auto;
+    border-radius:8px;
+    box-shadow:0 0 2px #aaa;
+    text-align:center;
 }
 
 .gamedetail img{
-    height:160px;
+    height:205px;
     margin:10px;
     cursor:pointer;
 }
@@ -91,8 +132,23 @@ footer{
 .gamedetail img:first-child{
     width:100%;
     height:100%;
-    max-width:480px;
+    max-width:540px;
     cursor: initial;
+}
+
+.detailtext{
+    width:100%;
+    padding:16px;
+    background:#fff;
+    margin-bottom:20px;
+    border-radius:8px;
+    box-shadow:0 0 2px #aaa;
+}
+
+.detailtext table{
+    width:100%;
+    text-align:center;
+    line-height:30px;
 }
 
 /*********************************/
@@ -139,7 +195,67 @@ button:hover,.button:hover{
 }
 
 /********************************/
+/*           FONT CSS           */
+/********************************/
+
+@font-face {
+    font-family:MavenPro;
+    src:url("../fonts/MavenPro.woff2");
+}
+
+/********************************/
 /*        Responsive CSS        */
 /********************************/
 
-@media all and (max-width: 700px){}
+@media all and (max-width: 1300px){
+    .gamedetail > div{
+        width:48%;
+    }
+
+    .gamedetail img:first-child{
+        width:94%;
+    }
+}
+
+@media all and (max-width: 1000px){
+    .gamedetail{
+        display:block;
+    }
+    
+    #detailimages{
+        margin-bottom:20px;
+    }
+
+    .gamedetail > div{
+        width:98%;
+    }
+}
+
+@media all and (max-width: 600px){
+    nav a{
+        padding:6px 8px;
+        font-size:12px;
+    }
+
+    .gamedetail table{
+        font-size:12px;
+    }
+    
+    .gamedetail img{
+        height:120px;
+    }
+    
+    .detailtext{
+        padding:8px;
+    }
+    
+    .gamelist img{
+        width:180px;
+        height:240px;
+    }
+
+    .gamelist a{
+        font-size:11px;
+        margin:6px;
+    }
+}
