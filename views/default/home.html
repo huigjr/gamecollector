@@ -23,12 +23,12 @@
 
 <main>
     <section class="gamelist">
-<?php foreach($games() as $game):?>
+<?php $i=1;foreach($games() as $game):?>
         <a href="games/<?=$game['url']?>"><figure>
-            <img src="assets/images/large/<?=$game['console']?>/<?=$game['image']?>" alt="<?=$game['title']?>">
+            <img src="assets/images/large/<?=$game['console']?>/<?=$game['image']?>" alt="<?=$game['title']?>" loading="<?=($i > 15 ? 'lazy' : 'eager')?>">
             <figcaption><?=$game['title']?></figcaption>
         </figure></a>
-<?php endforeach;?>
+<?php $i++;endforeach;?>
     </section>
 </main>
 
