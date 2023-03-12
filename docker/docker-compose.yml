@@ -1,0 +1,43 @@
+version: '3.3'
+
+services:
+  db:
+    image: mysql:8.0.25
+    restart: on-failure
+    environment:
+      MYSQL_DATABASE: 'allunited'
+      MYSQL_USER: 'allunited'
+      MYSQL_PASSWORD: 'allunited'
+      MYSQL_ROOT_PASSWORD: 'allunited'
+      TZ: 'Europe/Amsterdam'
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql-data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+
+  web:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./backoffice:/home/www/dv01.allunited.nl:delegated
+      - ./website:/home/www/website:delegated
+      - ./legacy_restful_api:/home/www/legacy_restful_api:delegated
+      - ./reports:/testing/reports:delegated
+      - ./tests:/testing/tests:delegated
+      - ./testing/vendor:/testing/vendor:delegated
+    environment:
+      - APP_ENV=local
+
+  mailhog:
+    image: mailhog/mailhog:v1.0.0
+    ports:
+      - '1025:1025'
+      - '8025:8025'
+
+volumes:
+  mysql-data:
